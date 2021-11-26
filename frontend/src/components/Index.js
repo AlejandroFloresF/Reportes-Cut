@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import card1 from '../images/Card1.svg';
 import card2 from '../images/Card2.svg';
 import card3 from '../images/Card3.svg';
@@ -9,24 +10,18 @@ export const Index = () => {
     function buttonUpload() {
         if (rol === "1") {
             window.alert('No tienes acceso aqui')
-        } else {
-            window.location.href= "/upload"
         }
     }
 
     function buttonReport() {
         if (rol === "1") {
             window.alert('No tienes acceso aqui')
-        } else {
-            window.location.href= "/report"
         }
     }
 
     function buttonAudit() {
         if (rol === "2") {
             window.alert('No tienes acceso aqui')
-        } else {
-            window.location.href= "/audit"
         }
     }
 
@@ -48,7 +43,7 @@ export const Index = () => {
                             <p className="card-text">En este apartado los maestros podran acceder para subir las evidencias generadas en el transcurso del semestre. </p>
                         </div>
                         <div className="text-center">
-                            <button onClick={buttonUpload} className="btn btn-outline-primary justify-content">Ir al sitio</button>
+                            <Link to="/upload"><button onClick={buttonUpload} className="btn btn-outline-primary justify-content" type="button">Ir al sitio</button></Link>
                         </div>
                         <div className="card-footer mt-3">
                             <small className="text-muted">(Solo Maestros)</small>
@@ -63,7 +58,7 @@ export const Index = () => {
                             <p className="card-text">Aqui podras generar el reporte de tus evidencias y actividades que has subido durante el semestre.</p>
                         </div>
                         <div className="text-center">
-                            <button onClick={buttonReport} className="btn btn-outline-primary justify-content">Ir al sitio</button>
+                            <Link to="/report"><button onClick={buttonReport} className="btn btn-outline-primary justify-content" type="button">Ir al sitio</button></Link>
                         </div>
                         <div className="card-footer mt-3">
                             <small className="text-muted">(Solo Maestros)</small>
@@ -78,7 +73,7 @@ export const Index = () => {
                             <p className="card-text">Area designada para el Jefe de departamento para la revision de actividades y evidencias.</p>
                         </div>
                         <div className="text-center">
-                            <button onClick={buttonAudit} type="button" className="btn btn-outline-primary justify-content">Ir al sitio</button>
+                            <Link to="/audit"><button onClick={buttonAudit} className="btn btn-outline-primary justify-content" type="button">Ir al sitio</button></Link>
                         </div>
                         <div className="card-footer mt-3">
                             <small className="text-muted">(Jefe de Departamento)</small>

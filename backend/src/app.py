@@ -152,6 +152,7 @@ def uploads():
             for i in files:
                 filedata = i.read().decode('latin-1')
                 filename = secure_filename(i.filename)
+                filename = filename.replace('_',' ')
                 mimetype = i.mimetype
                 myList.append(filename)
 

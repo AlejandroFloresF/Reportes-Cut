@@ -1,5 +1,6 @@
 import { Redirect } from "react-router-dom"
 import React, { useState, useEffect } from "react";
+import TableScrollbar from 'react-table-scrollbar'
 import Plot from "./Plot";
 
 const API = process.env.REACT_APP_API;
@@ -37,12 +38,15 @@ export const Report = () => {
 
 
   const DeleFile = async (id) => {
-    const res = await fetch(`${API}/deleteFile/${id}`, {
-      method: 'DELETE'
-    });
-    const data = await res.json();
-    console.log(data);
-    getFiles();
+    const userReponse = window.confirm('Estas Seguro de Eliminar este archivo?')
+    if(userReponse){
+      const res = await fetch(`${API}/deleteFile/${id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      console.log(data);
+      await getFiles();
+    }
   };
 
   const Download = async () => {
@@ -84,7 +88,8 @@ export const Report = () => {
 
         <div className="row" style={{ maxWidth: '99vw' }}>
 
-          <div className="TABLA  col-md-7 m-5">
+          <div className="TABLA  col-md-8 mt-3">
+            <TableScrollbar height = "80vh">
             <table className="table table-bordered">
               <thead className="bg-primary text-white">
                 <tr>
@@ -101,7 +106,7 @@ export const Report = () => {
                     <td>{item.shift}</td>
                     <td>{item.evidenceType}</td>
                     <td>{item.courseName}</td>
-                    <td>{item.fileName}</td>
+                    <td style={{ maxWidth: '280px' }}>{item.fileName}</td>
                     <td className="text-center">
                       <button onClick={() => DeleFile(item.id)} className="btn btn-danger btn-sm">Eliminar</button>
                     </td>
@@ -109,9 +114,10 @@ export const Report = () => {
                 ))}
               </tbody>
             </table>
+            </TableScrollbar>
           </div>
 
-          <div className="PLOT  col-md-4 m-4 ">
+          <div className="PLOT  col-md-4 mt-3 border border-dark" style={{ maxHeight: '91vh' }} >
 
             <div className="Codigo mt-3">
               <label className="form-label mt-2" htmlFor="readOnlyInput">Correo Institucional:</label>
@@ -121,11 +127,11 @@ export const Report = () => {
               <label className="form-label mt-2" htmlFor="readOnlyInput">Codigo:</label>
               <input className="form-control" value={id} id="readOnlyInput" type="text" placeholder="Ninguno" readOnly />
             </div>
-            <div className="border border-dark mb-3">
+            <div className="border border-dark mb-4">
               <Plot />
             </div>
             <div className="text-center d-grid gap-2">
-              <button onClick={() => Download()} type="button" className="btn btn-lg btn-success">Generar Reporte</button>
+              <button onClick={() => Download()} type="button" className="btn btn-lg btn-success text-primary">Generar Reporte</button>
             </div>
 
           </div>
